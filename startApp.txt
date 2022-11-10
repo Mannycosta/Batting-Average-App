@@ -1,0 +1,1 @@
+yarn react-native run-ios --simulator='iPhone 12 Pro Max'

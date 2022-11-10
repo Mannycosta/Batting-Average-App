@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/ComicShark.otf",
+      "sha1": "67f6dc1696c0eec9a8e7e23ba413596e23e78ce3"
+    },
+    {
+      "path": "assets/fonts/Exo2-Italic.otf",
+      "sha1": "f7ceb31a8d29a40491727e018d251b3caa921f1f"
+    },
+    {
+      "path": "assets/fonts/Tuwir.otf",
+      "sha1": "ea3ed5021ff0893bd7a8596002a4f3b46352d9b1"
+    }
+  ]
+}
