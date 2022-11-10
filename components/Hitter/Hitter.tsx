@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     marginTop: 60,
-    backgroundColor: 'rgba(225,225,225,.8)',
   },
   hitType: {
     color: 'red',
@@ -142,13 +141,3 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
-
-/*<AwesomeButton
-            style={[styles.btn, styles.shadowProp]}
-            textColor="black"
-            backgroundColor="white"
-            raiseLevel={0}
-            width={}
-            height={25}>
-            <Text>Out</Text>
-          </AwesomeButton> */

@@ -4,8 +4,6 @@ import Hitter from '../Hitter/Hitter';
 
 type Props = {};
 
-const baseballField = {};
-
 const Field = (props: Props) => {
   return (
     <View style={styles.container}>
@@ -23,6 +21,7 @@ export default Field;
 const styles = StyleSheet.create({
   container: {
     height: 500,
+    position: 'relative',
   },
   image: {
     flex: 1,
