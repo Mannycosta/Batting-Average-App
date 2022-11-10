@@ -1,30 +1,39 @@
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, View, Pressable} from 'react-native';
 import React from 'react';
-import Baseball from './img/noHitBat.svg';
+import Baseball from './img/nohit.svg';
 
 type Props = {
-  handleOut: any;
+  handleHit: any;
 };
 
-const NoHit = ({handleOut}: Props) => {
+const NoHit = ({handleHit}: Props) => {
   return (
-    <TouchableHighlight
-      underlayColor="rgba(0,0,0,0)"
-      onPress={handleOut}
-      activeOpacity={0.7}>
-      <View style={styles.noHitContainer}>
-        <Baseball width={75} height={75} />
-      </View>
-    </TouchableHighlight>
+    <Pressable
+      onPress={() => {
+        handleHit('Out!');
+      }}>
+      {({pressed}) => (
+        <View style={styles.noHitBtn}>
+          <Baseball
+            fill={pressed ? 'rgba(0,0,0,.5)' : 'red'}
+            width={50}
+            height={50}
+          />
+        </View>
+      )}
+    </Pressable>
   );
 };
 
 export default NoHit;
 
 const styles = StyleSheet.create({
-  noHitContainer: {
+  noHitBtn: {
+    width: 50,
+    height: 50,
     position: 'absolute',
     left: 30,
     bottom: -20,
+    borderRadius: 25,
   },
 });

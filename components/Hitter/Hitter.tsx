@@ -1,6 +1,13 @@
-import {StyleSheet, Text, View, Animated, SafeAreaView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Animated,
+  SafeAreaView,
+  Pressable,
+} from 'react-native';
 import AwesomeButton, {ThemedButton} from 'react-native-really-awesome-button';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Homeplate from '../Homplate/Homeplate';
 import NoHit from '../NoHit/NoHit';
 
@@ -8,95 +15,59 @@ type Props = {};
 
 const Hitter = (props: Props) => {
   const [scoreboardText, setScoreboardText] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const fadeAnimation = useRef(new Animated.Value(0)).current;
   const scaleAnimation = useRef(new Animated.Value(1)).current;
 
-  const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(fadeAnimation, {
-      toValue: 1,
-      duration: 250,
-      useNativeDriver: true,
-    }).start();
+  const animateScoreboard = () => {
+    const fadeIn = () => {
+      Animated.timing(fadeAnimation, {
+        toValue: 1,
+        duration: 250,
+        useNativeDriver: true,
+      }).start();
+    };
+    const fadeOut = () => {
+      Animated.timing(fadeAnimation, {
+        toValue: 0,
+        duration: 700,
+        useNativeDriver: true,
+      }).start();
+    };
+    const scaleUp = () => {
+      Animated.timing(scaleAnimation, {
+        toValue: 50,
+        duration: 700,
+        useNativeDriver: true,
+      }).start();
+    };
+    const scaleDown = () => {
+      Animated.timing(scaleAnimation, {
+        toValue: 1,
+        duration: 0,
+        useNativeDriver: true,
+      }).start();
+    };
+
+    fadeIn();
+    setTimeout(() => {
+      scaleUp();
+      fadeOut();
+    }, 1000);
+    scaleDown();
   };
 
-  const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 3 seconds
-    Animated.timing(fadeAnimation, {
-      toValue: 0,
-      duration: 700,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const scaleUp = () => {
-    Animated.timing(scaleAnimation, {
-      toValue: 50,
-      duration: 700,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const scaleDown = () => {
-    Animated.timing(scaleAnimation, {
-      toValue: 1,
-      duration: 0,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const handleSingle = () => {
-    setScoreboardText('Single!');
-    fadeIn();
-    setTimeout(() => {
-      scaleUp();
-      fadeOut();
-    }, 1000);
-    scaleDown();
-  };
-  const handleDouble = () => {
-    setScoreboardText('Double!');
-    fadeIn();
-    setTimeout(() => {
-      scaleUp();
-      fadeOut();
-    }, 1000);
-    scaleDown();
-  };
-  const handleTriple = () => {
-    setScoreboardText('Triple!');
-    fadeIn();
-    setTimeout(() => {
-      scaleUp();
-      fadeOut();
-    }, 1000);
-    scaleDown();
-  };
-  const handleHomerun = () => {
-    setScoreboardText('Homerun!');
-    fadeIn();
-    setTimeout(() => {
-      scaleUp();
-      fadeOut();
-    }, 1000);
-    scaleDown();
-  };
-  const handleOut = () => {
-    setScoreboardText('Out!');
-    fadeIn();
-    setTimeout(() => {
-      scaleUp();
-      fadeOut();
-    }, 1000);
-    scaleDown();
+  const handleHit = (hit: string) => {
+    setScoreboardText(hit);
+    animateScoreboard();
   };
 
   return (
     <View style={styles.fieldContainer}>
       <View style={styles.playerContainer}>
         <View style={styles.nameTag}>
-          <Text style={styles.playerName}>Manny</Text>
+          <Text style={styles.playerName}>Player Name</Text>
         </View>
       </View>
       <View style={styles.scoreBoardContainer}>
@@ -112,44 +83,44 @@ const Hitter = (props: Props) => {
       </View>
       <View style={styles.basesContainer}>
         <View style={[styles.btnContainer, styles.shadowProp]}>
-          <AwesomeButton
-            style={[styles.btn, styles.shadowProp]}
-            textColor="black"
-            backgroundColor="white"
-            raiseLevel={0}
-            width={30}
-            height={30}
-            onPressIn={handleDouble}>
-            <Text>Double</Text>
-          </AwesomeButton>
+          <Pressable
+            style={({pressed}) =>
+              !pressed
+                ? [styles.bases, styles.shadowProp]
+                : [styles.bases, styles.shadowProp, styles.basesPressed]
+            }
+            onPress={() => {
+              handleHit('Double!');
+            }}
+          />
         </View>
         <View style={[styles.btnContainer, styles.shadowProp, styles.endBases]}>
-          <AwesomeButton
-            style={[styles.btn, styles.shadowProp]}
-            textColor="black"
-            backgroundColor="white"
-            raiseLevel={0}
-            width={30}
-            height={30}
-            onPressIn={handleTriple}>
-            <Text>Triple</Text>
-          </AwesomeButton>
-          <AwesomeButton
-            style={[styles.btn, styles.shadowProp]}
-            textColor="black"
-            backgroundColor="white"
-            raiseLevel={0}
-            width={30}
-            height={30}
-            onPressIn={handleSingle}>
-            <Text>Single</Text>
-          </AwesomeButton>
+          <Pressable
+            style={({pressed}) =>
+              !pressed
+                ? [styles.bases, styles.shadowProp]
+                : [styles.bases, styles.shadowProp, styles.basesPressed]
+            }
+            onPress={() => {
+              handleHit('Triple!');
+            }}
+          />
+          <Pressable
+            style={({pressed}) =>
+              !pressed
+                ? [styles.bases, styles.shadowProp]
+                : [styles.bases, styles.shadowProp, styles.basesPressed]
+            }
+            onPress={() => {
+              handleHit('Single!');
+            }}
+          />
         </View>
         <View style={[styles.btnContainer, styles.shadowProp]}>
-          <Homeplate handleHomerun={handleHomerun} />
+          <Homeplate handleHit={handleHit} isDisabled={isDisabled} />
         </View>
         <View>
-          <NoHit handleOut={handleOut} />
+          <NoHit handleHit={handleHit} />
         </View>
       </View>
     </View>
@@ -195,7 +166,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   hitType: {
-    color: 'red',
+    color: 'yellow',
     fontFamily: 'ComicShark',
     paddingVertical: 2,
     paddingHorizontal: 12,
@@ -210,9 +181,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  btn: {
+  bases: {
     margin: 0,
+    backgroundColor: 'white',
+    width: 30,
+    height: 30,
+    borderRadius: 4,
     transform: [{rotateX: '60deg'}, {rotateZ: '45deg'}],
+  },
+  basesPressed: {
+    backgroundColor: 'rgba(150,150,150,.8)',
   },
   endBases: {
     justifyContent: 'space-between',

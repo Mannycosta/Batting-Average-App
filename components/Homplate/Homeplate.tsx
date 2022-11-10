@@ -1,43 +1,33 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-  Pressable,
-} from 'react-native';
+import {StyleSheet, View, Pressable} from 'react-native';
 import React from 'react';
-import Svg, {Path} from 'react-native-svg';
 import HomeplateSVG from './img/homeplate.svg';
 
 type Props = {
-  handleHomerun: any;
+  handleHit: any;
+  isDisabled: boolean;
 };
 
-const Homeplate = ({handleHomerun}: Props) => {
+const Homeplate = ({handleHit, isDisabled}: Props) => {
   return (
-    <TouchableHighlight
-      underlayColor="rgba(0,0,0,0)"
-      onPressIn={handleHomerun}
-      activeOpacity={0.7}>
-      <View style={styles.homeBaseContainer}>
+    <Pressable
+      onPress={() => {
+        handleHit('Homerun!');
+      }}>
+      {({pressed}) => (
         <HomeplateSVG
           width={50}
           height={50}
-          fill="black"
+          fill={pressed ? 'rgba(150,150,150,.8)' : 'white'}
           style={styles.homeBase}
         />
-      </View>
-    </TouchableHighlight>
+      )}
+    </Pressable>
   );
 };
 
 export default Homeplate;
 
 const styles = StyleSheet.create({
-  homeBaseContainer: {
-    width: 50,
-    height: 50,
-  },
   homeBase: {
     borderRadius: 4,
     transform: [{rotateX: '60deg'}],
