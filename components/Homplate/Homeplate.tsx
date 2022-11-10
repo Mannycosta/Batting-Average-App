@@ -9,17 +9,15 @@ import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 import HomeplateSVG from './img/homeplate.svg';
 
-type Props = {};
-
-const clicked = () => {
-  console.log('clicked');
+type Props = {
+  handleHomerun: any;
 };
 
-const Homeplate = ({}: Props) => {
+const Homeplate = ({handleHomerun}: Props) => {
   return (
     <TouchableHighlight
       underlayColor="rgba(0,0,0,0)"
-      onPress={clicked}
+      onPressIn={handleHomerun}
       activeOpacity={0.7}>
       <View style={styles.homeBaseContainer}>
         <HomeplateSVG

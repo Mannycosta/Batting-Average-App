@@ -2,17 +2,15 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import React from 'react';
 import Baseball from './img/noHitBat.svg';
 
-type Props = {};
-
-const clicked = () => {
-  console.log('clicked');
+type Props = {
+  handleOut: any;
 };
 
-const NoHit = (props: Props) => {
+const NoHit = ({handleOut}: Props) => {
   return (
     <TouchableHighlight
       underlayColor="rgba(0,0,0,0)"
-      onPress={clicked}
+      onPress={handleOut}
       activeOpacity={0.7}>
       <View style={styles.noHitContainer}>
         <Baseball width={75} height={75} />
