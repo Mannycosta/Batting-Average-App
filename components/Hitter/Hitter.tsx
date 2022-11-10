@@ -15,6 +15,7 @@ type Props = {};
 
 const Hitter = (props: Props) => {
   const [scoreboardText, setScoreboardText] = useState('');
+  const [scoreboardColor, setScoreboardColor] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
 
   const fadeAnimation = useRef(new Animated.Value(0)).current;
@@ -59,6 +60,11 @@ const Hitter = (props: Props) => {
   };
 
   const handleHit = (hit: string) => {
+    hit === 'Homerun!'
+      ? setScoreboardColor('yellow')
+      : hit === 'Out!'
+      ? setScoreboardColor('hsl(12, 100%, 50%)')
+      : setScoreboardColor('hsl(120, 82%, 50%)');
     setScoreboardText(hit);
     animateScoreboard();
   };
@@ -77,7 +83,9 @@ const Hitter = (props: Props) => {
               opacity: fadeAnimation,
               transform: [{scale: scaleAnimation}],
             }}>
-            <Text style={styles.hitType}>{scoreboardText}</Text>
+            <Text style={[styles.hitType, {color: scoreboardColor}]}>
+              {scoreboardText}
+            </Text>
           </Animated.View>
         </SafeAreaView>
       </View>
@@ -166,7 +174,6 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   hitType: {
-    color: 'yellow',
     fontFamily: 'ComicShark',
     paddingVertical: 2,
     paddingHorizontal: 12,
