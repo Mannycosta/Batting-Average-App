@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
     height: 300,
     display: 'flex',
     justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#04732f',
     borderTopWidth: 4,
     borderTopColor: '#098235',
   },
   stats: {
+    fontFamily: 'Exo2-Italic',
     fontSize: 20,
     marginBottom: 10,
     marginLeft: 20,
