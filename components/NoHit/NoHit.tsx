@@ -4,13 +4,15 @@ import Baseball from './img/nohit.svg';
 
 type Props = {
   handleHit: any;
+  countUpHits: any;
 };
 
-const NoHit = ({handleHit}: Props) => {
+const NoHit = ({handleHit, countUpHits}: Props) => {
   return (
     <Pressable
       onPress={() => {
         handleHit('Out!');
+        countUpHits(0);
       }}>
       {({pressed}) => (
         <View style={styles.noHitBtn}>

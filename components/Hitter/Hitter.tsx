@@ -11,9 +11,25 @@ import React, {useEffect, useRef, useState} from 'react';
 import Homeplate from '../Homplate/Homeplate';
 import NoHit from '../NoHit/NoHit';
 
-type Props = {};
+type Props = {
+  setSingles: Function;
+  setDoubles: Function;
+  setTriples: Function;
+  setHomeruns: Function;
+  setOuts: Function;
+  setTotalHits: Function;
+  setAtBats: Function;
+};
 
-const Hitter = (props: Props) => {
+const Hitter = ({
+  setSingles,
+  setDoubles,
+  setTriples,
+  setHomeruns,
+  setOuts,
+  setTotalHits,
+  setAtBats,
+}: Props) => {
   const [scoreboardText, setScoreboardText] = useState('');
   const [scoreboardColor, setScoreboardColor] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
@@ -69,6 +85,37 @@ const Hitter = (props: Props) => {
     animateScoreboard();
   };
 
+  const countUpHits = (hit: number) => {
+    hit === 1
+      ? setSingles((prevcount: any) => {
+          return prevcount + 1;
+        })
+      : hit === 2
+      ? setDoubles((prevcount: any) => {
+          return prevcount + 1;
+        })
+      : hit === 3
+      ? setTriples((prevcount: any) => {
+          return prevcount + 1;
+        })
+      : hit === 4
+      ? setHomeruns((prevcount: any) => {
+          return prevcount + 1;
+        })
+      : setOuts((prevcount: any) => {
+          return prevcount + 1;
+        });
+
+    hit !== 0 &&
+      setTotalHits((prevcount: any) => {
+        return prevcount + 1;
+      });
+
+    setAtBats((prevcount: any) => {
+      return prevcount + 1;
+    });
+  };
+
   return (
     <View style={styles.fieldContainer}>
       <View style={styles.playerContainer}>
@@ -99,6 +146,7 @@ const Hitter = (props: Props) => {
             }
             onPress={() => {
               handleHit('Double!');
+              countUpHits(2);
             }}
           />
         </View>
@@ -111,6 +159,7 @@ const Hitter = (props: Props) => {
             }
             onPress={() => {
               handleHit('Triple!');
+              countUpHits(3);
             }}
           />
           <Pressable
@@ -121,14 +170,19 @@ const Hitter = (props: Props) => {
             }
             onPress={() => {
               handleHit('Single!');
+              countUpHits(1);
             }}
           />
         </View>
         <View style={[styles.btnContainer, styles.shadowProp]}>
-          <Homeplate handleHit={handleHit} isDisabled={isDisabled} />
+          <Homeplate
+            handleHit={handleHit}
+            isDisabled={isDisabled}
+            countUpHits={countUpHits}
+          />
         </View>
         <View>
-          <NoHit handleHit={handleHit} />
+          <NoHit handleHit={handleHit} countUpHits={countUpHits} />
         </View>
       </View>
     </View>

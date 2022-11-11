@@ -1,7 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Header from './components/Header/Header';
-import Hitter from './components/Hitter/Hitter';
 import Field from './components/Field/Field';
 
 type Props = {};

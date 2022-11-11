@@ -5,13 +5,15 @@ import HomeplateSVG from './img/homeplate.svg';
 type Props = {
   handleHit: any;
   isDisabled: boolean;
+  countUpHits: any;
 };
 
-const Homeplate = ({handleHit, isDisabled}: Props) => {
+const Homeplate = ({handleHit, countUpHits}: Props) => {
   return (
     <Pressable
       onPress={() => {
         handleHit('Homerun!');
+        countUpHits(4);
       }}>
       {({pressed}) => (
         <HomeplateSVG
