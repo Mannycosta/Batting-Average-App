@@ -33,7 +33,10 @@ const PlayerStats = ({
         <Text style={styles.stats}>Hits:{totalHits}</Text>
         <Text style={styles.stats}>At Bats:{atBats}</Text>
         <Text style={styles.stats}>
-          Average: {(totalHits / atBats).toFixed(3)}
+          Average:{' '}
+          {Number.isNaN(totalHits / atBats)
+            ? 0
+            : (totalHits / atBats).toFixed(3)}
         </Text>
       </View>
     </View>

@@ -30,7 +30,7 @@ const Hitter = ({
   setTotalHits,
   setAtBats,
 }: Props) => {
-  const [scoreboardText, setScoreboardText] = useState('');
+  const [scoreboardText, setScoreboardText] = useState('Start!');
   const [scoreboardColor, setScoreboardColor] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
 
