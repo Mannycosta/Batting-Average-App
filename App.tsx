@@ -1,57 +1,65 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Header from './components/Header/Header';
-import Field from './components/Field/Field';
 import Realm from 'realm';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Homepage from './components/Homepage/Homepage';
+import CreateNewTeam from './components/CreateNewTeam/CreateNewTeam';
+import TeamPage from './components/TeamPage/TeamPage';
+import StartGame from './components/StartGame/StartGame';
+import CurrentGame from './components/CurrentGame/CurrentGame';
+import GameSummary from './components/GameSummary/GameSummary';
 
 // Schema for database objects
-
-const TaskSchema = {
-  name: 'Task',
+const PlayerSchema = {
+  name: 'Player',
   properties: {
-    _id: 'int',
+    _id: 'objectId',
     name: 'string',
-    status: 'string?',
+    singles: {type: 'int', default: 0},
+    doubles: {type: 'int', default: 0},
+    triples: {type: 'int', default: 0},
+    homeruns: {type: 'int', default: 0},
+    walks: {type: 'int', default: 0},
+    atBats: {type: 'int', default: 0},
+    hits: {type: 'int', default: 0},
+    outs: {type: 'int', default: 0},
   },
   primaryKey: '_id',
 };
 
-(async () => {
-  // Use realm to interact with DB
-  const realm = await Realm.open({
-    path: 'myrealm',
-    schema: [TaskSchema],
-  });
-
-  let task1, task2;
-  realm.write(() => {
-    task1 = realm.create('Task', {
-      _id: 1,
-      name: 'go grocery shopping',
-      status: 'Open',
-    });
-    task2 = realm.create('Task', {
-      _id: 2,
-      name: 'go exercise',
-      status: 'Open',
-    });
-    console.log(`created two tasks: ${task1.name} & ${task2.name}`);
-  });
-  const tasks = realm.objects('Task');
-  console.log(`The lists of tasks are: ${tasks.map((task: any) => task.name)}`);
-})();
+// (async () => {
+//   // Use realm to interact with DB
+//   const realm = await Realm.open({
+//     path: 'myrealm',
+//     schema: [PlayerSchema],
+//   });
+// })();
 
 type Props = {};
 
+const Stack = createNativeStackNavigator();
+
 const App = (props: Props) => {
   return (
-    <View style={styles.container}>
-      <Header />
-      <Field />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Homepage} />
+        <Stack.Screen name="Create New Team" component={CreateNewTeam} />
+        <Stack.Screen name="Team Page" component={TeamPage} />
+        <Stack.Screen name="Start Game" component={StartGame} />
+        <Stack.Screen name="Current Game" component={CurrentGame} />
+        <Stack.Screen name="Game Summary" component={GameSummary} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
+{
+  /* <View style={styles.container}>
+          <Header />
+          <Field />
+        </View> */
+}
 export default App;
 
 const styles = StyleSheet.create({

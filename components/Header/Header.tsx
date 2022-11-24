@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import AwesomeButton from 'react-native-really-awesome-button/lib/typescript/src/Button';
 
 type Props = {};
 
@@ -19,7 +20,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'hsl(192, 82%, 49.5%)',
     display: 'flex',
     justifyContent: 'center',
-    alignContent: 'space-between',
   },
   text: {
     marginTop: 40,

@@ -1,12 +1,16 @@
-import {StyleSheet, Text, View, ImageBackground} from 'react-native';
+import {StyleSheet, Text, View, ImageBackground, Button} from 'react-native';
 import React, {useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Hitter from '../Hitter/Hitter';
 import PlayerStats from '../PlayerStats/PlayerStats';
 import {Teams} from '../../testRoster';
 
-type Props = {};
+type Props = {
+  navigation: any;
+};
 
-const Field = (props: Props) => {
+const Field = ({navigation}: Props) => {
   const [singles, setSingles] = useState(0);
   const [doubles, setDoubles] = useState(0);
   const [triples, setTriples] = useState(0);
@@ -63,6 +67,12 @@ const Field = (props: Props) => {
           />
         </ImageBackground>
       </View>
+      <Button
+        title="End Game"
+        onPress={() => {
+          navigation.navigate('Game Summary');
+        }}
+      />
       <PlayerStats currentBatter={currentBatter} />
     </>
   );
