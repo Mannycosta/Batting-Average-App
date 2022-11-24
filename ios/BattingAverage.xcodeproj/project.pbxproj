@@ -12,11 +12,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		38C0C10E722D4BC185FA3154 /* ComicShark.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3E6475AC1E14FB28699E6CF /* ComicShark.otf */; };
+		489BB5D852F542A58D03FA03 /* Exo2-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D83BFDA0810491AB8CB2D93 /* Exo2-Italic.otf */; };
 		7699B88040F8A987B510C191 /* libPods-BattingAverage-BattingAverageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-BattingAverage-BattingAverageTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8A446F898224480DA1150F57 /* Tuwir.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5DB672660B5476EBB938FD3 /* Tuwir.otf */; };
-		38C0C10E722D4BC185FA3154 /* ComicShark.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3E6475AC1E14FB28699E6CF /* ComicShark.otf */; };
-		489BB5D852F542A58D03FA03 /* Exo2-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D83BFDA0810491AB8CB2D93 /* Exo2-Italic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,16 +40,16 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BattingAverage/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BattingAverage/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-BattingAverage-BattingAverageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BattingAverage-BattingAverageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D83BFDA0810491AB8CB2D93 /* Exo2-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo2-Italic.otf"; path = "../assets/fonts/Exo2-Italic.otf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-BattingAverage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BattingAverage.debug.xcconfig"; path = "Target Support Files/Pods-BattingAverage/Pods-BattingAverage.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-BattingAverage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BattingAverage.release.xcconfig"; path = "Target Support Files/Pods-BattingAverage/Pods-BattingAverage.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-BattingAverage-BattingAverageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BattingAverage-BattingAverageTests.debug.xcconfig"; path = "Target Support Files/Pods-BattingAverage-BattingAverageTests/Pods-BattingAverage-BattingAverageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-BattingAverage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BattingAverage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BattingAverage/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-BattingAverage-BattingAverageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BattingAverage-BattingAverageTests.release.xcconfig"; path = "Target Support Files/Pods-BattingAverage-BattingAverageTests/Pods-BattingAverage-BattingAverageTests.release.xcconfig"; sourceTree = "<group>"; };
+		A5DB672660B5476EBB938FD3 /* Tuwir.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Tuwir.otf; path = ../assets/fonts/Tuwir.otf; sourceTree = "<group>"; };
+		B3E6475AC1E14FB28699E6CF /* ComicShark.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ComicShark.otf; path = ../assets/fonts/ComicShark.otf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		A5DB672660B5476EBB938FD3 /* Tuwir.otf */ = {isa = PBXFileReference; name = "Tuwir.otf"; path = "../assets/fonts/Tuwir.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B3E6475AC1E14FB28699E6CF /* ComicShark.otf */ = {isa = PBXFileReference; name = "ComicShark.otf"; path = "../assets/fonts/ComicShark.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2D83BFDA0810491AB8CB2D93 /* Exo2-Italic.otf */ = {isa = PBXFileReference; name = "Exo2-Italic.otf"; path = "../assets/fonts/Exo2-Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +87,17 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		11BA79B32D784949B3C7D4CC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A5DB672660B5476EBB938FD3 /* Tuwir.otf */,
+				B3E6475AC1E14FB28699E6CF /* ComicShark.otf */,
+				2D83BFDA0810491AB8CB2D93 /* Exo2-Italic.otf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		13B07FAE1A68108700A75B9A /* BattingAverage */ = {
@@ -154,17 +165,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		11BA79B32D784949B3C7D4CC /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				A5DB672660B5476EBB938FD3 /* Tuwir.otf */,
-				B3E6475AC1E14FB28699E6CF /* ComicShark.otf */,
-				2D83BFDA0810491AB8CB2D93 /* Exo2-Italic.otf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 

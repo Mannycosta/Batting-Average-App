@@ -3,16 +3,20 @@ import React from 'react';
 import Baseball from './img/nohit.svg';
 
 type Props = {
-  handleHit: any;
-  countUpHits: any;
+  handleHit: Function;
+  countUpHits: Function;
+  goThroughLineup: Function;
 };
 
-const NoHit = ({handleHit, countUpHits}: Props) => {
+const NoHit = ({handleHit, countUpHits, goThroughLineup}: Props) => {
   return (
     <Pressable
       onPress={() => {
         handleHit('Out!');
         countUpHits(0);
+        setTimeout(() => {
+          goThroughLineup();
+        }, 1950);
       }}>
       {({pressed}) => (
         <View style={styles.noHitBtn}>

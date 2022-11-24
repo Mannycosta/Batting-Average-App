@@ -3,17 +3,21 @@ import React from 'react';
 import HomeplateSVG from './img/homeplate.svg';
 
 type Props = {
-  handleHit: any;
+  handleHit: Function;
   isDisabled: boolean;
-  countUpHits: any;
+  countUpHits: Function;
+  goThroughLineup: Function;
 };
 
-const Homeplate = ({handleHit, countUpHits}: Props) => {
+const Homeplate = ({handleHit, countUpHits, goThroughLineup}: Props) => {
   return (
     <Pressable
       onPress={() => {
         handleHit('Homerun!');
         countUpHits(4);
+        setTimeout(() => {
+          goThroughLineup();
+        }, 1950);
       }}>
       {({pressed}) => (
         <HomeplateSVG

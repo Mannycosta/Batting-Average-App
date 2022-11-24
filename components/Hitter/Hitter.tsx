@@ -19,6 +19,8 @@ type Props = {
   setOuts: Function;
   setTotalHits: Function;
   setAtBats: Function;
+  currentBatter: any;
+  setCurrentBatter: Function;
 };
 
 const Hitter = ({
@@ -27,8 +29,8 @@ const Hitter = ({
   setTriples,
   setHomeruns,
   setOuts,
-  setTotalHits,
-  setAtBats,
+  currentBatter,
+  setCurrentBatter,
 }: Props) => {
   const [scoreboardText, setScoreboardText] = useState('Start!');
   const [scoreboardColor, setScoreboardColor] = useState('');
@@ -85,42 +87,69 @@ const Hitter = ({
     animateScoreboard();
   };
 
+  const goThroughLineup = () => {};
+
   const countUpHits = (hit: number) => {
     hit === 1
-      ? setSingles((prevcount: any) => {
+      ? setSingles((prevcount: number) => {
+          const newPlayerStats = {
+            ...currentBatter,
+            singles: currentBatter.singles + 1,
+            hits: currentBatter.hits + 1,
+            atBats: currentBatter.atBats + 1,
+          };
+          setCurrentBatter(newPlayerStats);
           return prevcount + 1;
         })
       : hit === 2
-      ? setDoubles((prevcount: any) => {
+      ? setDoubles((prevcount: number) => {
+          const newPlayerStats = {
+            ...currentBatter,
+            doubles: currentBatter.doubles + 1,
+            hits: currentBatter.hits + 1,
+            atBats: currentBatter.atBats + 1,
+          };
+          setCurrentBatter(newPlayerStats);
           return prevcount + 1;
         })
       : hit === 3
-      ? setTriples((prevcount: any) => {
+      ? setTriples((prevcount: number) => {
+          const newPlayerStats = {
+            ...currentBatter,
+            triples: currentBatter.triples + 1,
+            hits: currentBatter.hits + 1,
+            atBats: currentBatter.atBats + 1,
+          };
+          setCurrentBatter(newPlayerStats);
           return prevcount + 1;
         })
       : hit === 4
-      ? setHomeruns((prevcount: any) => {
+      ? setHomeruns((prevcount: number) => {
+          const newPlayerStats = {
+            ...currentBatter,
+            homeruns: currentBatter.homeruns + 1,
+            hits: currentBatter.hits + 1,
+            atBats: currentBatter.atBats + 1,
+          };
+          setCurrentBatter(newPlayerStats);
           return prevcount + 1;
         })
-      : setOuts((prevcount: any) => {
+      : setOuts((prevcount: number) => {
+          const newPlayerStats = {
+            ...currentBatter,
+            outs: currentBatter.outs + 1,
+            atBats: currentBatter.atBats + 1,
+          };
+          setCurrentBatter(newPlayerStats);
           return prevcount + 1;
         });
-
-    hit !== 0 &&
-      setTotalHits((prevcount: any) => {
-        return prevcount + 1;
-      });
-
-    setAtBats((prevcount: any) => {
-      return prevcount + 1;
-    });
   };
 
   return (
     <View style={styles.fieldContainer}>
       <View style={styles.playerContainer}>
         <View style={styles.nameTag}>
-          <Text style={styles.playerName}>Player Name</Text>
+          <Text style={styles.playerName}>{currentBatter.name}</Text>
         </View>
       </View>
       <View style={styles.scoreBoardContainer}>
@@ -147,6 +176,9 @@ const Hitter = ({
             onPress={() => {
               handleHit('Double!');
               countUpHits(2);
+              setTimeout(() => {
+                goThroughLineup();
+              }, 1950);
             }}
           />
         </View>
@@ -160,6 +192,9 @@ const Hitter = ({
             onPress={() => {
               handleHit('Triple!');
               countUpHits(3);
+              setTimeout(() => {
+                goThroughLineup();
+              }, 1950);
             }}
           />
           <Pressable
@@ -171,6 +206,9 @@ const Hitter = ({
             onPress={() => {
               handleHit('Single!');
               countUpHits(1);
+              setTimeout(() => {
+                goThroughLineup();
+              }, 1950);
             }}
           />
         </View>
@@ -179,10 +217,15 @@ const Hitter = ({
             handleHit={handleHit}
             isDisabled={isDisabled}
             countUpHits={countUpHits}
+            goThroughLineup={goThroughLineup}
           />
         </View>
         <View>
-          <NoHit handleHit={handleHit} countUpHits={countUpHits} />
+          <NoHit
+            handleHit={handleHit}
+            countUpHits={countUpHits}
+            goThroughLineup={goThroughLineup}
+          />
         </View>
       </View>
     </View>

@@ -2,41 +2,27 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 
 type Props = {
-  singles: number;
-  doubles: number;
-  triples: number;
-  homeruns: number;
-  outs: number;
-  totalHits: number;
-  atBats: number;
+  currentBatter: any;
 };
 
-const PlayerStats = ({
-  singles,
-  doubles,
-  triples,
-  homeruns,
-  outs,
-  totalHits,
-  atBats,
-}: Props) => {
+const PlayerStats = ({currentBatter}: Props) => {
   return (
     <View style={styles.statContainer}>
       <View>
-        <Text style={styles.stats}>Singles:{singles}</Text>
-        <Text style={styles.stats}>Doubles:{doubles}</Text>
-        <Text style={styles.stats}>Triples:{triples}</Text>
-        <Text style={styles.stats}>Homeruns:{homeruns}</Text>
+        <Text style={styles.stats}>Singles:{currentBatter.singles}</Text>
+        <Text style={styles.stats}>Doubles:{currentBatter.doubles}</Text>
+        <Text style={styles.stats}>Triples:{currentBatter.triples}</Text>
+        <Text style={styles.stats}>Homeruns:{currentBatter.homeruns}</Text>
       </View>
       <View>
-        <Text style={styles.stats}>Outs:{outs}</Text>
-        <Text style={styles.stats}>Hits:{totalHits}</Text>
-        <Text style={styles.stats}>At Bats:{atBats}</Text>
+        <Text style={styles.stats}>Outs:{currentBatter.outs}</Text>
+        <Text style={styles.stats}>Hits:{currentBatter.hits}</Text>
+        <Text style={styles.stats}>At Bats:{currentBatter.atBats}</Text>
         <Text style={styles.stats}>
           Average:{' '}
-          {Number.isNaN(totalHits / atBats)
+          {Number.isNaN(currentBatter.hits / currentBatter.atBats)
             ? 0
-            : (totalHits / atBats).toFixed(3)}
+            : (currentBatter.hits / currentBatter.atBats).toFixed(3)}
         </Text>
       </View>
     </View>
