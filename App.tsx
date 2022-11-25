@@ -3,6 +3,7 @@ import React from 'react';
 import Realm from 'realm';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NativeBaseProvider} from 'native-base';
 import Homepage from './components/Homepage/Homepage';
 import CreateNewTeam from './components/CreateNewTeam/CreateNewTeam';
 import TeamPage from './components/TeamPage/TeamPage';
@@ -42,16 +43,18 @@ const Stack = createNativeStackNavigator();
 
 const App = (props: Props) => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Homepage} />
-        <Stack.Screen name="Create New Team" component={CreateNewTeam} />
-        <Stack.Screen name="Team Page" component={TeamPage} />
-        <Stack.Screen name="Start Game" component={StartGame} />
-        <Stack.Screen name="Current Game" component={CurrentGame} />
-        <Stack.Screen name="Game Summary" component={GameSummary} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Homepage} />
+          <Stack.Screen name="Create New Team" component={CreateNewTeam} />
+          <Stack.Screen name="Team Page" component={TeamPage} />
+          <Stack.Screen name="Start Game" component={StartGame} />
+          <Stack.Screen name="Current Game" component={CurrentGame} />
+          <Stack.Screen name="Game Summary" component={GameSummary} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 };
 {
