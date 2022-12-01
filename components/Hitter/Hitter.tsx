@@ -6,7 +6,6 @@ import {
   SafeAreaView,
   Pressable,
 } from 'react-native';
-import AwesomeButton, {ThemedButton} from 'react-native-really-awesome-button';
 import React, {useEffect, useRef, useState} from 'react';
 import Homeplate from '../Homplate/Homeplate';
 import NoHit from '../NoHit/NoHit';

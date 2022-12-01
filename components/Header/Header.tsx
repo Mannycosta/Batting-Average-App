@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import AwesomeButton from 'react-native-really-awesome-button/lib/typescript/src/Button';
 
 type Props = {};
 
