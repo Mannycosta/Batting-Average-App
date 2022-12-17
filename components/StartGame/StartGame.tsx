@@ -55,7 +55,7 @@ const StartGame = ({navigation}: Props) => {
       <Button
         title="Current Game"
         onPress={() => {
-          navigation.navigate('Current Game');
+          navigation.navigate('CurrentGame');
         }}
       />
     </View>

@@ -17,7 +17,7 @@ const Homepage = ({navigation, teams}: Props) => {
         <Button
           title={team.teamName}
           onPress={() => {
-            navigation.navigate('Team Page', {...team});
+            navigation.navigate('TeamPage', {...team});
           }}
         />
       );
@@ -29,7 +29,7 @@ const Homepage = ({navigation, teams}: Props) => {
       <Button
         title="Create New Team!"
         onPress={() => {
-          navigation.navigate('Create New Team');
+          navigation.navigate('CreateNewTeam');
         }}
       />
     </View>

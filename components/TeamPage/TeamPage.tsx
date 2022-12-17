@@ -16,7 +16,7 @@ const TeamPage = ({navigation, route}: Props) => {
       <Button
         title="Start Game"
         onPress={() => {
-          navigation.navigate('Start Game');
+          navigation.navigate('StartGame');
         }}
       />
     </View>
