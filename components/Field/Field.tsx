@@ -70,7 +70,7 @@ const Field = ({navigation}: Props) => {
       <Button
         title="End Game"
         onPress={() => {
-          navigation.navigate('Game Summary');
+          navigation.navigate('GameSummary');
         }}
       />
       <PlayerStats currentBatter={currentBatter} />

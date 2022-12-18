@@ -12,7 +12,7 @@ const GameSummary = ({navigation}: Props) => {
       <Button
         title="Back to Team Page"
         onPress={() => {
-          navigation.navigate('Team Page');
+          navigation.navigate('TeamPage');
         }}
       />
     </View>

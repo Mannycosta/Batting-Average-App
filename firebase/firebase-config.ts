@@ -5,7 +5,7 @@ import {getFirestore} from 'firebase/firestore/lite';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyCf3nJTsTlCxjyd3V6svf_pLuQ7O51fmDE',
   authDomain: 'stat-ninja.firebaseapp.com',
   projectId: 'stat-ninja',

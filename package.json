@@ -16,7 +16,7 @@
     "@svgr/core": "^6.5.1",
     "bson": "^4.7.0",
     "bson-ext": "^4.0.3",
-    "firebase": "^9.14.0",
+    "firebase": "^9.15.0",
     "kerberos": "^2.0.1",
     "native-base": "^3.4.22",
     "path-dirname": "^1.0.2",
@@ -25,9 +25,9 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.18.2",
     "react-native-svg": "^12.1.1",
+    "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^9.2.0",
-    "realm": "^11.3.0",
-    "uuid": "^9.0.0"
+    "realm": "^11.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -40,6 +40,7 @@
     "@types/react": "^18.0.21",
     "@types/react-native": "^0.70.6",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "babel-jest": "^26.6.3",

@@ -25,7 +25,7 @@ const Homepage = ({navigation, teams}: Props) => {
   }
   return (
     <View>
-      {teams.length && listOfTeams}
+      {teams.length ? listOfTeams : null}
       <Button
         title="Create New Team!"
         onPress={() => {

@@ -9,10 +9,10 @@ type Props = {
 };
 
 const TeamPage = ({navigation, route}: Props) => {
-  const {id, teamName, roster} = route.params;
+  // const {id, teamName, roster} = route.params;
+  // console.log(roster);
   return (
     <View>
-      <Text>{teamName}</Text>
       <Button
         title="Start Game"
         onPress={() => {

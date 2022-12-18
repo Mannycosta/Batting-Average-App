@@ -6,6 +6,7 @@ import {NativeBaseProvider} from 'native-base';
 import {firebaseDB} from './firebase/firebase-config';
 import {
   getFirestore,
+  doc,
   collection,
   getDocs,
   DocumentData,
@@ -29,7 +30,9 @@ const App = (props: Props) => {
   const loadTeams = async (db: Firestore) => {
     const teamCollection = collection(db, 'teams');
     const teamSnapshot = await getDocs(teamCollection);
-    const teamsList = teamSnapshot.docs.map(doc => doc.data());
+    const teamsList = teamSnapshot.docs.map(doc => {
+      return {...doc.data(), id: doc.id};
+    });
     if (teamsList) {
       const teams: Team[] | DocumentData = [];
       teamsList.map(team => {
@@ -41,9 +44,7 @@ const App = (props: Props) => {
 
   useEffect(() => {
     loadTeams(firebaseDB);
-    if (teams.length) {
-    }
-  }, []);
+  }, [teams]);
 
   console.log(teams);
 
@@ -54,7 +55,11 @@ const App = (props: Props) => {
           <Stack.Screen name="Home">
             {props => <Homepage {...props} teams={teams} />}
           </Stack.Screen>
-          <Stack.Screen name="CreateNewTeam" component={CreateNewTeam} />
+          <Stack.Screen
+            name="CreateNewTeam"
+            component={CreateNewTeam}
+            options={{title: 'Create New Team'}}
+          />
           <Stack.Screen
             name="TeamPage"
             component={TeamPage}
