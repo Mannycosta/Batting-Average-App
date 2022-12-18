@@ -12,10 +12,11 @@ type Props = {
 const Homepage = ({navigation, teams}: Props) => {
   let listOfTeams = '';
   if (teams.length) {
-    listOfTeams = teams.map((team: Team) => {
+    listOfTeams = teams.map((team: Team, i: number) => {
       return (
         <Button
           title={team.teamName}
+          key={i}
           onPress={() => {
             navigation.navigate('TeamPage', {...team});
           }}

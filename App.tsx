@@ -46,8 +46,6 @@ const App = (props: Props) => {
     loadTeams(firebaseDB);
   }, [teams]);
 
-  console.log(teams);
-
   return (
     <NativeBaseProvider>
       <NavigationContainer>

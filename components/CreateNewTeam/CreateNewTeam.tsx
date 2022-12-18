@@ -65,10 +65,6 @@ const CreateNewTeam = ({navigation}: Props) => {
       console.log(error);
     }
   };
-
-  console.log(roster);
-
-  console.log(teamName);
   return (
     <View>
       <Text>Team Name</Text>

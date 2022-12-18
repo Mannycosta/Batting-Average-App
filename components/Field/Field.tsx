@@ -5,12 +5,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Hitter from '../Hitter/Hitter';
 import PlayerStats from '../PlayerStats/PlayerStats';
 import {Teams} from '../../testRoster';
+import {Roster} from '../../types/Roster';
 
 type Props = {
   navigation: any;
+  roster: Roster[];
 };
 
-const Field = ({navigation}: Props) => {
+const Field = ({navigation, roster}: Props) => {
   const [singles, setSingles] = useState(0);
   const [doubles, setDoubles] = useState(0);
   const [triples, setTriples] = useState(0);
@@ -19,34 +21,8 @@ const Field = ({navigation}: Props) => {
   const [totalHits, setTotalHits] = useState(0);
   const [atBats, setAtBats] = useState(0);
 
-  let lineup = [
-    {
-      _id: 123,
-      name: 'Manny',
-      singles: 0,
-      doubles: 0,
-      triples: 0,
-      homeruns: 0,
-      walks: 0,
-      atBats: 0,
-      hits: 0,
-      outs: 0,
-    },
-    // {
-    //   _id: 1234,
-    //   name: 'Manol',
-    //   singles: 0,
-    //   doubles: 0,
-    //   triples: 0,
-    //   homeruns: 0,
-    //   walks: 0,
-    //   atBats: 0,
-    //   hits: 0,
-    //   outs: 0,
-    // },
-  ];
-
-  const [currentBatter, setCurrentBatter] = useState(lineup[0]);
+  const [lineupCount, setLineupCount] = useState<number>(0);
+  const [currentBatter, setCurrentBatter] = useState(roster[lineupCount]);
 
   return (
     <>
@@ -64,6 +40,9 @@ const Field = ({navigation}: Props) => {
             setAtBats={setAtBats}
             currentBatter={currentBatter}
             setCurrentBatter={setCurrentBatter}
+            roster={roster}
+            setLineupCount={setLineupCount}
+            lineupCount={lineupCount}
           />
         </ImageBackground>
       </View>

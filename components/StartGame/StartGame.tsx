@@ -1,5 +1,5 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Box, Center, Select} from 'native-base';
@@ -7,55 +7,76 @@ import {ObjectId} from 'bson';
 
 type Props = {
   navigation: any;
+  route: any;
 };
-const StartGame = ({navigation}: Props) => {
-  const [service, setService] = React.useState('');
-  const roster = [
-    {
-      _id: new ObjectId('631cf12245b094c37c5bb906'),
-      name: 'Manny Costa',
-    },
-    {
-      _id: new ObjectId('6321310d186fdd4355f940e3'),
-      name: 'Emanol Costa',
-    },
-    {
-      _id: new ObjectId('632244f00752d531bf1160fd'),
-      name: 'Brandon Gomez',
-    },
-  ];
-  const currentRoster = roster.map((player, i) => {
+const StartGame = ({navigation, route}: Props) => {
+  const [player, setPlayer] = useState('');
+  const [lineupLength, setLineupLength] = useState(9);
+  const {roster} = route.params;
+  const currentRoster = roster.map((player: any, i: number) => {
     return (
       <Select.Item
-        label={`${player.name}`}
-        value={`${player._id.toString()}`}
+        label={`${player.playerName}`}
+        value={`${player.id}`}
         key={`${i}`}
       />
     );
   });
+
+  const lineupLengthOptions = [];
+
+  for (let i = 9; i <= roster.length; i++) {
+    lineupLengthOptions.push(
+      <Select.Item label={`${i}`} value={`${i}`} key={`${i}`} />,
+    );
+  }
+
+  console.log(lineupLength);
   return (
     <View>
-      <Text>Set Lineup</Text>
-      <Center>
+      {/* <Text>How many people will you be hitting?</Text>
+      <View>
         <Box maxW="300">
           <Select
-            selectedValue={service}
+            selectedValue={lineupLength.toString()}
             minWidth="200"
-            accessibilityLabel="Choose Service"
-            placeholder="Choose Service"
+            accessibilityLabel="Choose Amount..."
+            placeholder="Choose Amount..."
             _selectedItem={{
               bg: 'teal.600',
             }}
             mt={1}
-            onValueChange={itemValue => setService(itemValue)}>
-            {currentRoster}
+            onValueChange={itemValue => setLineupLength(Number(itemValue))}>
+            {lineupLengthOptions}
           </Select>
         </Box>
-      </Center>
+      </View>
+      <Text>Set Lineup</Text>
+      {Array.from(Array(lineupLength)).map((number, i) => {
+        return (
+          <View>
+            <Text>{i + 1}</Text>
+            <Box key={i} maxW="300">
+              <Select
+                selectedValue={player}
+                minWidth="200"
+                accessibilityLabel="Choose Player..."
+                placeholder="Choose Player..."
+                _selectedItem={{
+                  bg: 'teal.600',
+                }}
+                mt={1}
+                onValueChange={itemValue => setPlayer(itemValue)}>
+                {currentRoster}
+              </Select>
+            </Box>
+          </View>
+        );
+      })} */}
       <Button
-        title="Current Game"
+        title="Ready"
         onPress={() => {
-          navigation.navigate('CurrentGame');
+          navigation.navigate('CurrentGame', {roster: [...roster]});
         }}
       />
     </View>

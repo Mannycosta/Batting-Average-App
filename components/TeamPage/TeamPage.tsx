@@ -9,14 +9,23 @@ type Props = {
 };
 
 const TeamPage = ({navigation, route}: Props) => {
-  // const {id, teamName, roster} = route.params;
-  // console.log(roster);
+  const {id, teamName, roster} = route.params;
+  console.log(roster);
   return (
     <View>
+      <Text>Team Leaders</Text>
+      <Text>singles</Text>
+      <Text>doubles</Text>
+      <Text>triples</Text>
+      <Text>homeruns</Text>
+      <Text>walks</Text>
+      <Text>average</Text>
+      <Text>hits</Text>
+      <Text>outs</Text>
       <Button
-        title="Start Game"
+        title="Start A New Game"
         onPress={() => {
-          navigation.navigate('StartGame');
+          navigation.navigate('StartGame', {roster: roster});
         }}
       />
     </View>

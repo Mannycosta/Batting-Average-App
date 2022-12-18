@@ -6,13 +6,18 @@ import CurrentGameStats from '../CurrentGame/CurrentGameStats';
 import Field from '../Field/Field';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-type Props = {};
+type Props = {
+  route: any;
+};
 
-const CurrentGame = (props: Props) => {
+const CurrentGame = ({route}: Props) => {
   const Tab = createBottomTabNavigator();
+  const {roster} = route.params;
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Field" component={Field} />
+      <Tab.Screen name="Field">
+        {props => <Field {...props} roster={roster} />}
+      </Tab.Screen>
       <Tab.Screen name="Current Game Stats" component={CurrentGameStats} />
     </Tab.Navigator>
   );

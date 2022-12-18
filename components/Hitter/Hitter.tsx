@@ -9,6 +9,7 @@ import {
 import React, {useEffect, useRef, useState} from 'react';
 import Homeplate from '../Homplate/Homeplate';
 import NoHit from '../NoHit/NoHit';
+import {Roster} from '../../types/Roster';
 
 type Props = {
   setSingles: Function;
@@ -18,8 +19,11 @@ type Props = {
   setOuts: Function;
   setTotalHits: Function;
   setAtBats: Function;
-  currentBatter: any;
+  currentBatter: Roster;
   setCurrentBatter: Function;
+  roster: Roster[];
+  setLineupCount: Function;
+  lineupCount: number;
 };
 
 const Hitter = ({
@@ -30,6 +34,9 @@ const Hitter = ({
   setOuts,
   currentBatter,
   setCurrentBatter,
+  roster,
+  setLineupCount,
+  lineupCount,
 }: Props) => {
   const [scoreboardText, setScoreboardText] = useState('Start!');
   const [scoreboardColor, setScoreboardColor] = useState('');
@@ -86,7 +93,16 @@ const Hitter = ({
     animateScoreboard();
   };
 
-  const goThroughLineup = () => {};
+  const goThroughLineup = () => {
+    if (lineupCount !== roster.length - 1) {
+      setLineupCount((prevCount: number) => prevCount + 1);
+      const newLineupCount = lineupCount + 1;
+      setCurrentBatter(roster[newLineupCount]);
+    } else {
+      setLineupCount(0);
+      setCurrentBatter(roster[0]);
+    }
+  };
 
   const countUpHits = (hit: number) => {
     hit === 1
@@ -148,7 +164,7 @@ const Hitter = ({
     <View style={styles.fieldContainer}>
       <View style={styles.playerContainer}>
         <View style={styles.nameTag}>
-          <Text style={styles.playerName}>{currentBatter.name}</Text>
+          <Text style={styles.playerName}>{currentBatter.playerName}</Text>
         </View>
       </View>
       <View style={styles.scoreBoardContainer}>
