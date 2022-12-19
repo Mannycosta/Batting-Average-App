@@ -22,8 +22,6 @@ type Props = {
   currentBatter: Roster;
   setCurrentBatter: Function;
   roster: Roster[];
-  setLineupCount: Function;
-  lineupCount: number;
 };
 
 const Hitter = ({
@@ -35,17 +33,8 @@ const Hitter = ({
   currentBatter,
   setCurrentBatter,
   roster,
-  setLineupCount,
-  lineupCount,
 }: Props) => {
-  const [scoreboardText, setScoreboardText] = useState('Start!');
-  const [scoreboardColor, setScoreboardColor] = useState('');
-  const [isDisabled, setIsDisabled] = useState(false);
-
-  const fadeAnimation = useRef(new Animated.Value(0)).current;
-  const scaleAnimation = useRef(new Animated.Value(1)).current;
-
-  const currentGameStatsRoster = roster.map(player => {
+  const newGameRoster = roster.map(player => {
     return {
       id: player.id,
       playerName: player.playerName,
@@ -59,6 +48,13 @@ const Hitter = ({
       outs: 0,
     };
   });
+  const [scoreboardText, setScoreboardText] = useState('Start!');
+  const [scoreboardColor, setScoreboardColor] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [currentGameRoster, setCurrentGameRoster] = useState(newGameRoster);
+
+  const fadeAnimation = useRef(new Animated.Value(0)).current;
+  const scaleAnimation = useRef(new Animated.Value(1)).current;
 
   const animateScoreboard = () => {
     const fadeIn = () => {
@@ -109,71 +105,81 @@ const Hitter = ({
   };
 
   const goThroughLineup = () => {
-    if (lineupCount !== roster.length - 1) {
-      setLineupCount((prevCount: number) => prevCount + 1);
-      const newLineupCount = lineupCount + 1;
-      setCurrentBatter(roster[newLineupCount]);
-    } else {
-      setLineupCount(0);
-      setCurrentBatter(roster[0]);
-    }
+    setCurrentBatter(currentGameRoster[1]);
   };
 
   const singleFunc = () => {
+    const updatedRoster = currentGameRoster.filter(player => {
+      return player.id !== currentBatter.id;
+    });
+    const newPlayerStats = {
+      ...currentBatter,
+      singles: currentBatter.singles + 1,
+      hits: currentBatter.hits + 1,
+      atBats: currentBatter.atBats + 1,
+    };
+    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+  };
+  const doubleFunc = () => {
+    const updatedRoster = currentGameRoster.filter(player => {
+      return player.id !== currentBatter.id;
+    });
     const newPlayerStats = {
       ...currentBatter,
       doubles: currentBatter.doubles + 1,
       hits: currentBatter.hits + 1,
       atBats: currentBatter.atBats + 1,
     };
-    roster;
+    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
   };
+  const tripleFunc = () => {
+    const updatedRoster = currentGameRoster.filter(player => {
+      return player.id !== currentBatter.id;
+    });
+    const newPlayerStats = {
+      ...currentBatter,
+      triples: currentBatter.triples + 1,
+      hits: currentBatter.hits + 1,
+      atBats: currentBatter.atBats + 1,
+    };
+    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+  };
+  const homerunFunc = () => {
+    const updatedRoster = currentGameRoster.filter(player => {
+      return player.id !== currentBatter.id;
+    });
+    const newPlayerStats = {
+      ...currentBatter,
+      homeruns: currentBatter.homeruns + 1,
+      hits: currentBatter.hits + 1,
+      atBats: currentBatter.atBats + 1,
+    };
+    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+  };
+  const outFunc = () => {
+    const updatedRoster = currentGameRoster.filter(player => {
+      return player.id !== currentBatter.id;
+    });
+    const newPlayerStats = {
+      ...currentBatter,
+      outs: currentBatter.outs + 1,
+      atBats: currentBatter.atBats + 1,
+    };
+    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+  };
+
+  console.log(currentGameRoster);
 
   const countUpHits = (hit: number) => {
     hit === 1
       ? singleFunc()
       : hit === 2
-      ? setDoubles((prevcount: number) => {
-          const newPlayerStats = {
-            ...currentBatter,
-            doubles: currentBatter.doubles + 1,
-            hits: currentBatter.hits + 1,
-            atBats: currentBatter.atBats + 1,
-          };
-          setCurrentBatter(newPlayerStats);
-          return prevcount + 1;
-        })
+      ? doubleFunc()
       : hit === 3
-      ? setTriples((prevcount: number) => {
-          const newPlayerStats = {
-            ...currentBatter,
-            triples: currentBatter.triples + 1,
-            hits: currentBatter.hits + 1,
-            atBats: currentBatter.atBats + 1,
-          };
-          setCurrentBatter(newPlayerStats);
-          return prevcount + 1;
-        })
+      ? tripleFunc()
       : hit === 4
-      ? setHomeruns((prevcount: number) => {
-          const newPlayerStats = {
-            ...currentBatter,
-            homeruns: currentBatter.homeruns + 1,
-            hits: currentBatter.hits + 1,
-            atBats: currentBatter.atBats + 1,
-          };
-          setCurrentBatter(newPlayerStats);
-          return prevcount + 1;
-        })
-      : setOuts((prevcount: number) => {
-          const newPlayerStats = {
-            ...currentBatter,
-            outs: currentBatter.outs + 1,
-            atBats: currentBatter.atBats + 1,
-          };
-          setCurrentBatter(newPlayerStats);
-          return prevcount + 1;
-        });
+      ? homerunFunc()
+      : outFunc();
   };
 
   return (

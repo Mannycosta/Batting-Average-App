@@ -21,8 +21,7 @@ const Field = ({navigation, roster}: Props) => {
   const [totalHits, setTotalHits] = useState(0);
   const [atBats, setAtBats] = useState(0);
 
-  const [lineupCount, setLineupCount] = useState<number>(0);
-  const [currentBatter, setCurrentBatter] = useState(roster[lineupCount]);
+  const [currentBatter, setCurrentBatter] = useState(roster[0]);
 
   return (
     <>
@@ -41,8 +40,6 @@ const Field = ({navigation, roster}: Props) => {
             currentBatter={currentBatter}
             setCurrentBatter={setCurrentBatter}
             roster={roster}
-            setLineupCount={setLineupCount}
-            lineupCount={lineupCount}
           />
         </ImageBackground>
       </View>

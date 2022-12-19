@@ -13,6 +13,10 @@ type Props = {
 };
 
 const Homepage = ({navigation, teams, setTeams}: Props) => {
+  useEffect(() => {
+    loadTeams(firebaseDB, setTeams);
+  }, []);
+
   let listOfTeams;
   if (teams.length) {
     listOfTeams = teams.map((team: Team, i: number) => {

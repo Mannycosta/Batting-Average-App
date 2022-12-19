@@ -2,7 +2,7 @@ import {ObjectId} from 'bson';
 
 export const Teams = [
   {
-    _id: new ObjectId('631b3ace0c7e00937e2a77de'),
+    id: 'ea7336fb-d5ac-41f8-98f1-1db04a28a8f4',
     name: 'Reds',
     roster: [
       {

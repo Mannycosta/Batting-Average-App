@@ -1,9 +1,6 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Box, Center, Select} from 'native-base';
-import {ObjectId} from 'bson';
 
 type Props = {
   navigation: any;
