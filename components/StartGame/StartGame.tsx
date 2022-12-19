@@ -13,15 +13,15 @@ const StartGame = ({navigation, route}: Props) => {
   const [player, setPlayer] = useState('');
   const [lineupLength, setLineupLength] = useState(9);
   const {roster} = route.params;
-  const currentRoster = roster.map((player: any, i: number) => {
-    return (
-      <Select.Item
-        label={`${player.playerName}`}
-        value={`${player.id}`}
-        key={`${i}`}
-      />
-    );
-  });
+  // const currentRoster = roster.map((player: any, i: number) => {
+  //   return (
+  //     <Select.Item
+  //       label={`${player.playerName}`}
+  //       value={`${player.id}`}
+  //       key={`${i}`}
+  //     />
+  //   );
+  // });
 
   const lineupLengthOptions = [];
 

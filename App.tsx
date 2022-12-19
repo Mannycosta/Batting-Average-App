@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {NavigationContainer, TabRouter} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NativeBaseProvider} from 'native-base';
-import {firebaseDB} from './firebase/firebase-config';
+import {firebaseDB, loadTeams} from './firebase/firebase-config';
 import {
   getFirestore,
   doc,
@@ -27,37 +27,24 @@ const Stack = createNativeStackNavigator();
 const App = (props: Props) => {
   const [teams, setTeams] = useState<Team[] | DocumentData>([]);
 
-  const loadTeams = async (db: Firestore) => {
-    const teamCollection = collection(db, 'teams');
-    const teamSnapshot = await getDocs(teamCollection);
-    const teamsList = teamSnapshot.docs.map(doc => {
-      return {...doc.data(), id: doc.id};
-    });
-    if (teamsList) {
-      const teams: Team[] | DocumentData = [];
-      teamsList.map(team => {
-        teams.push(team);
-      });
-      setTeams(teams);
-    }
-  };
-
-  useEffect(() => {
-    loadTeams(firebaseDB);
-  }, [teams]);
-
   return (
     <NativeBaseProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home">
-            {props => <Homepage {...props} teams={teams} />}
+            {props => <Homepage {...props} teams={teams} setTeams={setTeams} />}
           </Stack.Screen>
           <Stack.Screen
             name="CreateNewTeam"
-            component={CreateNewTeam}
-            options={{title: 'Create New Team'}}
-          />
+            options={{title: 'Create New Team'}}>
+            {props => (
+              <CreateNewTeam
+                {...props}
+                loadTeams={loadTeams}
+                setTeams={setTeams}
+              />
+            )}
+          </Stack.Screen>
           <Stack.Screen
             name="TeamPage"
             component={TeamPage}

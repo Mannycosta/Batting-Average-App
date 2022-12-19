@@ -1,6 +1,13 @@
 // Import the functions you need from the SDKs you need
 import {initializeApp} from 'firebase/app';
-import {getFirestore} from 'firebase/firestore/lite';
+import {
+  collection,
+  DocumentData,
+  Firestore,
+  getDocs,
+  getFirestore,
+} from 'firebase/firestore/lite';
+import {Team} from '../types/Team';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,3 +24,18 @@ export const firebaseConfig = {
 // Initialize Firebase
 const statNinja = initializeApp(firebaseConfig);
 export const firebaseDB = getFirestore(statNinja);
+
+export const loadTeams = async (db: Firestore, setTeams: Function) => {
+  const teamCollection = collection(db, 'teams');
+  const teamSnapshot = await getDocs(teamCollection);
+  const teamsList = teamSnapshot.docs.map(doc => {
+    return {...doc.data(), id: doc.id};
+  });
+  if (teamsList.length > 0) {
+    const teams: Team[] | DocumentData = [];
+    teamsList.map(team => {
+      teams.push(team);
+    });
+    setTeams(teams);
+  }
+};

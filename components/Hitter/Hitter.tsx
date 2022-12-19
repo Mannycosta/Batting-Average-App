@@ -45,6 +45,21 @@ const Hitter = ({
   const fadeAnimation = useRef(new Animated.Value(0)).current;
   const scaleAnimation = useRef(new Animated.Value(1)).current;
 
+  const currentGameStatsRoster = roster.map(player => {
+    return {
+      id: player.id,
+      playerName: player.playerName,
+      singles: 0,
+      doubles: 0,
+      triples: 0,
+      homeruns: 0,
+      walks: 0,
+      atBats: 0,
+      hits: 0,
+      outs: 0,
+    };
+  });
+
   const animateScoreboard = () => {
     const fadeIn = () => {
       Animated.timing(fadeAnimation, {
@@ -104,18 +119,19 @@ const Hitter = ({
     }
   };
 
+  const singleFunc = () => {
+    const newPlayerStats = {
+      ...currentBatter,
+      doubles: currentBatter.doubles + 1,
+      hits: currentBatter.hits + 1,
+      atBats: currentBatter.atBats + 1,
+    };
+    roster;
+  };
+
   const countUpHits = (hit: number) => {
     hit === 1
-      ? setSingles((prevcount: number) => {
-          const newPlayerStats = {
-            ...currentBatter,
-            singles: currentBatter.singles + 1,
-            hits: currentBatter.hits + 1,
-            atBats: currentBatter.atBats + 1,
-          };
-          setCurrentBatter(newPlayerStats);
-          return prevcount + 1;
-        })
+      ? singleFunc()
       : hit === 2
       ? setDoubles((prevcount: number) => {
           const newPlayerStats = {

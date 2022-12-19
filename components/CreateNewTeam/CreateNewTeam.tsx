@@ -1,18 +1,17 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {Input, Button as BaseButton} from 'native-base';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import uuid from 'react-native-uuid';
 import {firebaseDB} from '../../firebase/firebase-config';
 import {collection, addDoc} from 'firebase/firestore/lite';
-import {initializeApp} from 'firebase/app';
 
 type Props = {
   navigation: any;
+  loadTeams: Function;
+  setTeams: Function;
 };
 
-const CreateNewTeam = ({navigation}: Props) => {
+const CreateNewTeam = ({navigation, loadTeams, setTeams}: Props) => {
   const [teamName, setTeamName] = useState('');
   const [playerName, setPlayerName] = useState('');
   const [roster, setRoster] = useState<string[]>([]);
@@ -60,6 +59,7 @@ const CreateNewTeam = ({navigation}: Props) => {
     try {
       const docRef = await addDoc(collection(firebaseDB, 'teams'), newTeam);
       console.log('Team has been added succesfully, with id:', docRef.id);
+      loadTeams(firebaseDB, setTeams);
       navigation.navigate('Home');
     } catch (error) {
       console.log(error);

@@ -1,7 +1,5 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {getFirestore, collection, getDocs} from 'firebase/firestore/lite';
-import {Firestore} from 'firebase/firestore/lite';
 
 type Props = {
   navigation: any;
@@ -10,7 +8,6 @@ type Props = {
 
 const TeamPage = ({navigation, route}: Props) => {
   const {id, teamName, roster} = route.params;
-  console.log(roster);
   return (
     <View>
       <Text>Team Leaders</Text>
