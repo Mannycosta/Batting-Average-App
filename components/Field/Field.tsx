@@ -14,9 +14,10 @@ type Props = {
   lineup: Roster[];
   id: string;
   teamName: string;
+  roster: Roster[];
 };
 
-const Field = ({navigation, lineup, teamName, id}: Props) => {
+const Field = ({navigation, lineup, teamName, id, roster}: Props) => {
   const newGameRoster = lineup.map(player => {
     return {
       id: player.id,
@@ -32,13 +33,19 @@ const Field = ({navigation, lineup, teamName, id}: Props) => {
     };
   });
 
-  const [currentBatter, setCurrentBatter] = useState(lineup[0]);
-  const [currentGameRoster, setCurrentGameRoster] = useState(newGameRoster);
+  const nonActivePlayers = roster.filter(players => {
+    return lineup.every(activePlayer => {
+      return players.id !== activePlayer.id;
+    });
+  });
 
-  const handleCreateNewTeam = async () => {
+  const [currentBatter, setCurrentBatter] = useState(lineup[0]);
+  const [currentGameRoster, setCurrentGameRoster] = useState(lineup);
+
+  const handleUpdateStats = async () => {
     const newTeamStats = {
       teamName: teamName,
-      roster: [...currentGameRoster],
+      roster: [...nonActivePlayers, ...currentGameRoster],
     };
     try {
       await setDoc(doc(firebaseDB, 'teams', id), newTeamStats);
@@ -63,7 +70,7 @@ const Field = ({navigation, lineup, teamName, id}: Props) => {
           />
         </ImageBackground>
       </View>
-      <Button title="End Game" onPress={handleCreateNewTeam} />
+      <Button title="End Game" onPress={handleUpdateStats} />
       <PlayerStats currentBatter={currentBatter} />
     </>
   );

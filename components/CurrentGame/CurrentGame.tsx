@@ -12,12 +12,18 @@ type Props = {
 
 const CurrentGame = ({route}: Props) => {
   const Tab = createBottomTabNavigator();
-  const {id, teamName, lineup} = route.params;
+  const {id, teamName, lineup, roster} = route.params;
   return (
     <Tab.Navigator>
       <Tab.Screen name="Field">
         {props => (
-          <Field {...props} lineup={lineup} id={id} teamName={teamName} />
+          <Field
+            {...props}
+            roster={roster}
+            lineup={lineup}
+            id={id}
+            teamName={teamName}
+          />
         )}
       </Tab.Screen>
       <Tab.Screen name="Current Game Stats" component={CurrentGameStats} />

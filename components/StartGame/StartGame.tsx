@@ -30,7 +30,6 @@ const StartGame = ({navigation, route}: Props) => {
         <BaseButton
           width={100}
           marginBottom={15}
-          nativeID={player.id.toString()}
           onPress={() => {
             handleAddToLineup(player);
           }}>
@@ -40,6 +39,10 @@ const StartGame = ({navigation, route}: Props) => {
     );
   });
 
+  const handleClearLineup = () => {
+    setNewGameLineup([]);
+  };
+
   const lineupPreview = newGameLineup.map(player => {
     return <Text>{player.playerName}</Text>;
   });
@@ -48,11 +51,15 @@ const StartGame = ({navigation, route}: Props) => {
       <Text>Set Lineup for game</Text>
       {playerBtns}
       {lineupPreview}
+      <BaseButton width={100} marginBottom={15} onPress={handleClearLineup}>
+        Clear Lineup
+      </BaseButton>
       <Button
         title="Ready"
         onPress={() => {
           navigation.navigate('CurrentGame', {
             lineup: [...newGameLineup],
+            roster: [...roster],
             id: id,
             teamName: teamName,
           });
