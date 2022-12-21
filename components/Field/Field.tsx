@@ -11,12 +11,12 @@ import {firebaseDB, loadTeams} from '../../firebase/firebase-config';
 
 type Props = {
   navigation: any;
-  roster: Roster[];
+  lineup: Roster[];
   id: string;
   teamName: string;
 };
 
-const Field = ({navigation, roster: lineup, teamName, id}: Props) => {
+const Field = ({navigation, lineup, teamName, id}: Props) => {
   const newGameRoster = lineup.map(player => {
     return {
       id: player.id,
@@ -34,8 +34,6 @@ const Field = ({navigation, roster: lineup, teamName, id}: Props) => {
 
   const [currentBatter, setCurrentBatter] = useState(lineup[0]);
   const [currentGameRoster, setCurrentGameRoster] = useState(newGameRoster);
-
-  console.log(lineup);
 
   const handleCreateNewTeam = async () => {
     const newTeamStats = {

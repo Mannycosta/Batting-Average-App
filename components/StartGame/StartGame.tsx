@@ -1,82 +1,58 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  GestureResponderEvent,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
-import {Box, Center, Select} from 'native-base';
+import {Button as BaseButton} from 'native-base';
+import {Roster} from '../../types/Roster';
 
 type Props = {
   navigation: any;
   route: any;
 };
 const StartGame = ({navigation, route}: Props) => {
-  const [player, setPlayer] = useState('');
-  const [lineupLength, setLineupLength] = useState(9);
   const {id, teamName, roster} = route.params;
-  // const currentRoster = roster.map((player: any, i: number) => {
-  //   return (
-  //     <Select.Item
-  //       label={`${player.playerName}`}
-  //       value={`${player.id}`}
-  //       key={`${i}`}
-  //     />
-  //   );
-  // });
+  const [newGameLineup, setNewGameLineup] = useState<Roster[]>([]);
 
-  console.log(teamName);
+  const lineupOrders: Roster[] = [];
 
-  const lineupLengthOptions = [];
+  const handleAddToLineup = (player: Roster) => {
+    lineupOrders.push(player);
+    setNewGameLineup([...newGameLineup, ...lineupOrders]);
+  };
 
-  for (let i = 9; i <= roster.length; i++) {
-    lineupLengthOptions.push(
-      <Select.Item label={`${i}`} value={`${i}`} key={`${i}`} />,
+  const playerBtns = roster.map((player: Roster) => {
+    return (
+      <View>
+        <BaseButton
+          width={100}
+          marginBottom={15}
+          nativeID={player.id.toString()}
+          onPress={() => {
+            handleAddToLineup(player);
+          }}>
+          {player.playerName}
+        </BaseButton>
+      </View>
     );
-  }
+  });
 
-  console.log(lineupLength);
+  const lineupPreview = newGameLineup.map(player => {
+    return <Text>{player.playerName}</Text>;
+  });
   return (
     <View>
-      {/* <Text>How many people will you be hitting?</Text>
-      <View>
-        <Box maxW="300">
-          <Select
-            selectedValue={lineupLength.toString()}
-            minWidth="200"
-            accessibilityLabel="Choose Amount..."
-            placeholder="Choose Amount..."
-            _selectedItem={{
-              bg: 'teal.600',
-            }}
-            mt={1}
-            onValueChange={itemValue => setLineupLength(Number(itemValue))}>
-            {lineupLengthOptions}
-          </Select>
-        </Box>
-      </View>
-      <Text>Set Lineup</Text>
-      {Array.from(Array(lineupLength)).map((number, i) => {
-        return (
-          <View>
-            <Text>{i + 1}</Text>
-            <Box key={i} maxW="300">
-              <Select
-                selectedValue={player}
-                minWidth="200"
-                accessibilityLabel="Choose Player..."
-                placeholder="Choose Player..."
-                _selectedItem={{
-                  bg: 'teal.600',
-                }}
-                mt={1}
-                onValueChange={itemValue => setPlayer(itemValue)}>
-                {currentRoster}
-              </Select>
-            </Box>
-          </View>
-        );
-      })} */}
+      <Text>Set Lineup for game</Text>
+      {playerBtns}
+      {lineupPreview}
       <Button
         title="Ready"
         onPress={() => {
           navigation.navigate('CurrentGame', {
-            roster: [...roster],
+            lineup: [...newGameLineup],
             id: id,
             teamName: teamName,
           });

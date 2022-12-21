@@ -1,5 +1,5 @@
 export type Roster = {
-  id: number;
+  id: string;
   playerName: string;
   singles: number;
   doubles: number;
