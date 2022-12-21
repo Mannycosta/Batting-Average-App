@@ -54,7 +54,11 @@ const App = (props: Props) => {
           />
           <Stack.Screen name="StartGame" component={StartGame} />
           <Stack.Screen name="CurrentGame" component={CurrentGame} />
-          <Stack.Screen name="GameSummary" component={GameSummary} />
+          <Stack.Screen name="GameSummary">
+            {props => (
+              <GameSummary {...props} setTeams={setTeams} teams={teams} />
+            )}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

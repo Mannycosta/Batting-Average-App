@@ -9,7 +9,7 @@ type Props = {
 const StartGame = ({navigation, route}: Props) => {
   const [player, setPlayer] = useState('');
   const [lineupLength, setLineupLength] = useState(9);
-  const {roster} = route.params;
+  const {id, teamName, roster} = route.params;
   // const currentRoster = roster.map((player: any, i: number) => {
   //   return (
   //     <Select.Item
@@ -19,6 +19,8 @@ const StartGame = ({navigation, route}: Props) => {
   //     />
   //   );
   // });
+
+  console.log(teamName);
 
   const lineupLengthOptions = [];
 
@@ -73,7 +75,11 @@ const StartGame = ({navigation, route}: Props) => {
       <Button
         title="Ready"
         onPress={() => {
-          navigation.navigate('CurrentGame', {roster: [...roster]});
+          navigation.navigate('CurrentGame', {
+            roster: [...roster],
+            id: id,
+            teamName: teamName,
+          });
         }}
       />
     </View>

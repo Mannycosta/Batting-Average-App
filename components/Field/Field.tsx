@@ -6,22 +6,50 @@ import Hitter from '../Hitter/Hitter';
 import PlayerStats from '../PlayerStats/PlayerStats';
 import {Teams} from '../../testRoster';
 import {Roster} from '../../types/Roster';
+import {doc, setDoc} from 'firebase/firestore/lite';
+import {firebaseDB, loadTeams} from '../../firebase/firebase-config';
 
 type Props = {
   navigation: any;
   roster: Roster[];
+  id: string;
+  teamName: string;
 };
 
-const Field = ({navigation, roster}: Props) => {
-  const [singles, setSingles] = useState(0);
-  const [doubles, setDoubles] = useState(0);
-  const [triples, setTriples] = useState(0);
-  const [homeruns, setHomeruns] = useState(0);
-  const [outs, setOuts] = useState(0);
-  const [totalHits, setTotalHits] = useState(0);
-  const [atBats, setAtBats] = useState(0);
+const Field = ({navigation, roster: lineup, teamName, id}: Props) => {
+  const newGameRoster = lineup.map(player => {
+    return {
+      id: player.id,
+      playerName: player.playerName,
+      singles: 0,
+      doubles: 0,
+      triples: 0,
+      homeruns: 0,
+      walks: 0,
+      atBats: 0,
+      hits: 0,
+      outs: 0,
+    };
+  });
 
-  const [currentBatter, setCurrentBatter] = useState(roster[0]);
+  const [currentBatter, setCurrentBatter] = useState(lineup[0]);
+  const [currentGameRoster, setCurrentGameRoster] = useState(newGameRoster);
+
+  console.log(lineup);
+
+  const handleCreateNewTeam = async () => {
+    const newTeamStats = {
+      teamName: teamName,
+      roster: [...currentGameRoster],
+    };
+    try {
+      await setDoc(doc(firebaseDB, 'teams', id), newTeamStats);
+      console.log('Team stats have been updated succesfully');
+      navigation.navigate('GameSummary', {id: id});
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -30,25 +58,14 @@ const Field = ({navigation, roster}: Props) => {
           source={require('../../images/baseballpark.jpg')}
           style={styles.image}>
           <Hitter
-            setSingles={setSingles}
-            setDoubles={setDoubles}
-            setTriples={setTriples}
-            setHomeruns={setHomeruns}
-            setOuts={setOuts}
-            setTotalHits={setTotalHits}
-            setAtBats={setAtBats}
             currentBatter={currentBatter}
             setCurrentBatter={setCurrentBatter}
-            roster={roster}
+            currentGameRoster={currentGameRoster}
+            setCurrentGameRoster={setCurrentGameRoster}
           />
         </ImageBackground>
       </View>
-      <Button
-        title="End Game"
-        onPress={() => {
-          navigation.navigate('GameSummary');
-        }}
-      />
+      <Button title="End Game" onPress={handleCreateNewTeam} />
       <PlayerStats currentBatter={currentBatter} />
     </>
   );

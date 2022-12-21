@@ -7,7 +7,8 @@ type Props = {
 };
 
 const TeamPage = ({navigation, route}: Props) => {
-  const {id, teamName, roster} = route.params;
+  const {id, teamName, roster, setTeams} = route.params;
+  console.log(route.params);
   return (
     <View>
       <Text>Team Leaders</Text>
@@ -22,7 +23,11 @@ const TeamPage = ({navigation, route}: Props) => {
       <Button
         title="Start A New Game"
         onPress={() => {
-          navigation.navigate('StartGame', {roster: roster});
+          navigation.navigate('StartGame', {
+            roster: roster,
+            id: id,
+            teamName: teamName,
+          });
         }}
       />
     </View>

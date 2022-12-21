@@ -12,46 +12,21 @@ import NoHit from '../NoHit/NoHit';
 import {Roster} from '../../types/Roster';
 
 type Props = {
-  setSingles: Function;
-  setDoubles: Function;
-  setTriples: Function;
-  setHomeruns: Function;
-  setOuts: Function;
-  setTotalHits: Function;
-  setAtBats: Function;
   currentBatter: Roster;
   setCurrentBatter: Function;
-  roster: Roster[];
+  currentGameRoster: Roster[];
+  setCurrentGameRoster: Function;
 };
 
 const Hitter = ({
-  setSingles,
-  setDoubles,
-  setTriples,
-  setHomeruns,
-  setOuts,
+  currentGameRoster,
+  setCurrentGameRoster,
   currentBatter,
   setCurrentBatter,
-  roster,
 }: Props) => {
-  const newGameRoster = roster.map(player => {
-    return {
-      id: player.id,
-      playerName: player.playerName,
-      singles: 0,
-      doubles: 0,
-      triples: 0,
-      homeruns: 0,
-      walks: 0,
-      atBats: 0,
-      hits: 0,
-      outs: 0,
-    };
-  });
   const [scoreboardText, setScoreboardText] = useState('Start!');
   const [scoreboardColor, setScoreboardColor] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
-  const [currentGameRoster, setCurrentGameRoster] = useState(newGameRoster);
 
   const fadeAnimation = useRef(new Animated.Value(0)).current;
   const scaleAnimation = useRef(new Animated.Value(1)).current;
@@ -109,7 +84,7 @@ const Hitter = ({
   };
 
   const singleFunc = () => {
-    const updatedRoster = currentGameRoster.filter(player => {
+    const currentGameUpdatedRoster = currentGameRoster.filter(player => {
       return player.id !== currentBatter.id;
     });
     const newPlayerStats = {
@@ -118,10 +93,10 @@ const Hitter = ({
       hits: currentBatter.hits + 1,
       atBats: currentBatter.atBats + 1,
     };
-    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+    setCurrentGameRoster([...currentGameUpdatedRoster, newPlayerStats]);
   };
   const doubleFunc = () => {
-    const updatedRoster = currentGameRoster.filter(player => {
+    const currentGameUpdatedRoster = currentGameRoster.filter(player => {
       return player.id !== currentBatter.id;
     });
     const newPlayerStats = {
@@ -130,10 +105,10 @@ const Hitter = ({
       hits: currentBatter.hits + 1,
       atBats: currentBatter.atBats + 1,
     };
-    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+    setCurrentGameRoster([...currentGameUpdatedRoster, newPlayerStats]);
   };
   const tripleFunc = () => {
-    const updatedRoster = currentGameRoster.filter(player => {
+    const currentGameUpdatedRoster = currentGameRoster.filter(player => {
       return player.id !== currentBatter.id;
     });
     const newPlayerStats = {
@@ -142,10 +117,10 @@ const Hitter = ({
       hits: currentBatter.hits + 1,
       atBats: currentBatter.atBats + 1,
     };
-    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+    setCurrentGameRoster([...currentGameUpdatedRoster, newPlayerStats]);
   };
   const homerunFunc = () => {
-    const updatedRoster = currentGameRoster.filter(player => {
+    const currentGameUpdatedRoster = currentGameRoster.filter(player => {
       return player.id !== currentBatter.id;
     });
     const newPlayerStats = {
@@ -154,10 +129,10 @@ const Hitter = ({
       hits: currentBatter.hits + 1,
       atBats: currentBatter.atBats + 1,
     };
-    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+    setCurrentGameRoster([...currentGameUpdatedRoster, newPlayerStats]);
   };
   const outFunc = () => {
-    const updatedRoster = currentGameRoster.filter(player => {
+    const currentGameUpdatedRoster = currentGameRoster.filter(player => {
       return player.id !== currentBatter.id;
     });
     const newPlayerStats = {
@@ -165,10 +140,8 @@ const Hitter = ({
       outs: currentBatter.outs + 1,
       atBats: currentBatter.atBats + 1,
     };
-    setCurrentGameRoster([...updatedRoster, newPlayerStats]);
+    setCurrentGameRoster([...currentGameUpdatedRoster, newPlayerStats]);
   };
-
-  console.log(currentGameRoster);
 
   const countUpHits = (hit: number) => {
     hit === 1
