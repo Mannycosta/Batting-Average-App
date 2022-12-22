@@ -50,7 +50,15 @@ const CurrentGame = ({route}: Props) => {
           />
         )}
       </Tab.Screen>
-      <Tab.Screen name="Current Game Stats" component={CurrentGameStats} />
+      <Tab.Screen name="Current Game Stats">
+        {props => (
+          <CurrentGameStats
+            {...props}
+            statPageCurrentGameRoster={statPageCurrentGameRoster}
+            statPageCurrentBatter={statPageCurrentBatter}
+          />
+        )}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };
