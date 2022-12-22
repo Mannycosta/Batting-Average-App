@@ -55,7 +55,6 @@ const CurrentGame = ({route}: Props) => {
           <CurrentGameStats
             {...props}
             statPageCurrentGameRoster={statPageCurrentGameRoster}
-            statPageCurrentBatter={statPageCurrentBatter}
           />
         )}
       </Tab.Screen>

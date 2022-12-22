@@ -1,16 +1,13 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Player, Roster} from '../../types/Roster';
+import {ScrollView} from 'native-base';
 
 type Props = {
-  statPageCurrentBatter: Player;
   statPageCurrentGameRoster: Roster;
 };
 
-const CurrentGameStats = ({
-  statPageCurrentBatter,
-  statPageCurrentGameRoster,
-}: Props) => {
+const CurrentGameStats = ({statPageCurrentGameRoster}: Props) => {
   const displayStats = statPageCurrentGameRoster.map(player => {
     return (
       <>
@@ -26,10 +23,10 @@ const CurrentGameStats = ({
     );
   });
   return (
-    <View>
+    <ScrollView>
       <Text>CurrentGameStats</Text>
       {displayStats.length > 0 ? displayStats : null}
-    </View>
+    </ScrollView>
   );
 };
 
