@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {Button as BaseButton} from 'native-base';
-import {Roster} from '../../types/Roster';
+import {Player, Roster} from '../../types/Roster';
 
 type Props = {
   navigation: any;
@@ -15,16 +15,16 @@ type Props = {
 };
 const StartGame = ({navigation, route}: Props) => {
   const {id, teamName, roster} = route.params;
-  const [newGameLineup, setNewGameLineup] = useState<Roster[]>([]);
+  const [newGameLineup, setNewGameLineup] = useState<Roster>([]);
 
-  const lineupOrders: Roster[] = [];
+  const lineupOrders: Roster = [];
 
-  const handleAddToLineup = (player: Roster) => {
+  const handleAddToLineup = (player: Player) => {
     lineupOrders.push(player);
     setNewGameLineup([...newGameLineup, ...lineupOrders]);
   };
 
-  const playerBtns = roster.map((player: Roster) => {
+  const playerBtns = roster.map((player: Player) => {
     return (
       <View>
         <BaseButton

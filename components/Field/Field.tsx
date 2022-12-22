@@ -5,34 +5,33 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Hitter from '../Hitter/Hitter';
 import PlayerStats from '../PlayerStats/PlayerStats';
 import {Teams} from '../../testRoster';
-import {Roster} from '../../types/Roster';
+import {Player, Roster} from '../../types/Roster';
 import {doc, setDoc} from 'firebase/firestore/lite';
 import {firebaseDB, loadTeams} from '../../firebase/firebase-config';
 
 type Props = {
   navigation: any;
-  lineup: Roster[];
+  lineup: Roster;
   id: string;
   teamName: string;
-  roster: Roster[];
+  roster: Roster;
+  statPageCurrentBatter: Player;
+  setStatPageCurrentBatter: Function;
+  statPageCurrentGameRoster: Roster;
+  setStatPageCurrentGameRoster: Function;
 };
 
-const Field = ({navigation, lineup, teamName, id, roster}: Props) => {
-  const newGameRoster = lineup.map(player => {
-    return {
-      id: player.id,
-      playerName: player.playerName,
-      singles: 0,
-      doubles: 0,
-      triples: 0,
-      homeruns: 0,
-      walks: 0,
-      atBats: 0,
-      hits: 0,
-      outs: 0,
-    };
-  });
-
+const Field = ({
+  navigation,
+  lineup,
+  teamName,
+  id,
+  roster,
+  statPageCurrentBatter,
+  setStatPageCurrentBatter,
+  statPageCurrentGameRoster,
+  setStatPageCurrentGameRoster,
+}: Props) => {
   const nonActivePlayers = roster.filter(players => {
     return lineup.every(activePlayer => {
       return players.id !== activePlayer.id;
@@ -67,6 +66,10 @@ const Field = ({navigation, lineup, teamName, id, roster}: Props) => {
             setCurrentBatter={setCurrentBatter}
             currentGameRoster={currentGameRoster}
             setCurrentGameRoster={setCurrentGameRoster}
+            statPageCurrentGameRoster={statPageCurrentGameRoster}
+            setStatPageCurrentGameRoster={setStatPageCurrentGameRoster}
+            statPageCurrentBatter={statPageCurrentBatter}
+            setStatPageCurrentBatter={setStatPageCurrentBatter}
           />
         </ImageBackground>
       </View>

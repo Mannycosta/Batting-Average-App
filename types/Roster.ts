@@ -1,4 +1,4 @@
-export type Roster = {
+export type Player = {
   id: string;
   playerName: string;
   singles: number;
@@ -10,3 +10,5 @@ export type Roster = {
   hits: number;
   outs: number;
 };
+
+export type Roster = Player[];
